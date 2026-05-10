@@ -72,21 +72,20 @@ export const popularItems = [
     description: 'Нежный раф с ароматом лаванды.',
     price: '340 ₽',
     badge: 'Хит',
-    image: '/images/lavender-raf.jpg',
+    image: `${import.meta.env.BASE_URL}images/lavender-raf.jpg`,
   },
   {
     name: 'Сырники с ягодами',
     description: 'Завтрак, ради которого гости возвращаются каждый день.',
     price: '450 ₽',
     badge: 'Завтрак',
-    image: '/images/syrniki.jpg',
+    image: `${import.meta.env.BASE_URL}images/syrniki.jpg`,
   },
   {
     name: 'Круассан миндальный',
     description: 'Хрустящая выпечка сминдальной начинкой.',
     price: '310 ₽',
     badge: 'Выпечка',
-    image: '/images/almond-croissant.jpg',
+    image: `${import.meta.env.BASE_URL}images/almond-croissant.jpg`,
   },
 ];
-ю

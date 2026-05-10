@@ -137,7 +137,7 @@ function BookingForm() {
             name="comment"
             value={form.comment}
             onChange={handleChange}
-            placeholder="Например, нужен столик у окна"
+            placeholder="Например: желательно столик у окна"
             rows="4"
           />
         </label>

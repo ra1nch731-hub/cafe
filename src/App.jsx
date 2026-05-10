@@ -7,7 +7,7 @@ import MenuSection from './components/MenuSection.jsx';
 const advantages = [
   {
     title: 'Свежая обжарка',
-    text: 'Зерно от локальных ростеров, мягкий эспрессо и фильтр с ярким профилем.',
+    text: 'Готовим кофе из свежих зёрен локальной обжарки.',
     icon: Coffee,
   },
   {
@@ -17,7 +17,7 @@ const advantages = [
   },
   {
     title: 'Уют для встреч',
-    text: 'Тихие столики, быстрый Wi-Fi и светлый интерьер для завтраков, работы и свиданий.',
+    text: 'Быстрый Wi-Fi и светлый интерьер для завтраков, работы и свиданий.',
     icon: Users,
   },
 ];
@@ -25,7 +25,7 @@ const advantages = [
 const gallery = [
   {
     src: 'https://images.unsplash.com/photo-1493857671505-72967e2e2760?auto=format&fit=crop&w=900&q=85',
-    alt: 'Барная стойка кофейни с теплым светом',
+    alt: 'Барная стойка кофейни',
   },
   {
     src: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=85',
@@ -33,11 +33,11 @@ const gallery = [
   },
   {
     src: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=85',
-    alt: 'Кофейня с большими окнами',
+    alt: 'Кофейня',
   },
   {
     src: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=85',
-    alt: 'Кофе и десерты на деревянном столе',
+    alt: 'Кофе и десерты на столе',
   },
 ];
 
@@ -49,12 +49,12 @@ const reviews = [
   },
   {
     name: 'Дмитрий Ковалев',
-    text: 'Нравится, что здесь не шумно и можно спокойно поработать. Отдельный плюс за сырники и фильтр.',
+    text: 'Нравится, что здесь не шумно и можно спокойно поработать. Отдельный плюс за сырники, они здесь очень хороши.',
     rating: 5,
   },
   {
     name: 'Мария Лебедева',
-    text: 'Красивый интерьер, приятная команда и десерты, которые хочется фотографировать перед первым кусочком.',
+    text: 'Красивый интерьер и приятный персонал.',
     rating: 5,
   },
 ];
@@ -80,7 +80,7 @@ function App() {
             <p className="eyebrow">Specialty coffee house</p>
             <h1>Cup & Corner</h1>
             <p className="hero__lead">
-              Кофейня на каждый день: авторский кофе, свежие завтраки и теплые столики для
+              Кофейня на каждый день: авторский кофе, свежие завтраки и столики для
               неспешных встреч в центре города.
             </p>
             <div className="hero__actions">
@@ -148,7 +148,7 @@ function App() {
             </p>
           </div>
           <a className="button button--primary" href="#booking">
-            Забронировать утро
+            Забронировать столик
           </a>
         </section>
 

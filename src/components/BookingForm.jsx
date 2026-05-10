@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CalendarCheck } from 'lucide-react';
+import { CalendarCheck, X } from 'lucide-react';
 
 const initialForm = {
   name: '',
@@ -14,6 +14,8 @@ function BookingForm() {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState(null);
+  const today = new Date().toISOString().split('T')[0];
 
   const validate = () => {
     const nextErrors = {};
@@ -29,6 +31,8 @@ function BookingForm() {
 
     if (!form.date) {
       nextErrors.date = 'Выберите дату';
+    } else if (form.date < today) {
+      nextErrors.date = 'Дата не может быть в прошлом';
     }
 
     if (!form.time) {
@@ -62,98 +66,127 @@ function BookingForm() {
     setForm(initialForm);
     setErrors({});
     setIsSubmitted(true);
+    setBookingDetails({ ...form });
+  };
+
+  const closeModal = () => {
+    setIsSubmitted(false);
   };
 
   return (
-    <form className="booking-form" onSubmit={handleSubmit} noValidate>
-      <div className="form-grid">
-        <label>
-          Имя
-          <input
-            name="name"
-            type="text"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Анна"
-            aria-invalid={Boolean(errors.name)}
-          />
-          {errors.name && <span className="field-error">{errors.name}</span>}
-        </label>
+    <>
+      <form className="booking-form" onSubmit={handleSubmit} noValidate>
+        <div className="form-grid">
+          <label>
+            Имя
+            <input
+              name="name"
+              type="text"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Анна"
+              aria-invalid={Boolean(errors.name)}
+            />
+            {errors.name && <span className="field-error">{errors.name}</span>}
+          </label>
 
-        <label>
-          Телефон
-          <input
-            name="phone"
-            type="tel"
-            value={form.phone}
-            onChange={handleChange}
-            placeholder="+7 900 123-45-67"
-            aria-invalid={Boolean(errors.phone)}
-          />
-          {errors.phone && <span className="field-error">{errors.phone}</span>}
-        </label>
+          <label>
+            Телефон
+            <input
+              name="phone"
+              type="tel"
+              value={form.phone}
+              onChange={handleChange}
+              placeholder="+7 900 123-45-67"
+              aria-invalid={Boolean(errors.phone)}
+            />
+            {errors.phone && <span className="field-error">{errors.phone}</span>}
+          </label>
 
-        <label>
-          Дата
-          <input
-            name="date"
-            type="date"
-            value={form.date}
-            onChange={handleChange}
-            aria-invalid={Boolean(errors.date)}
-          />
-          {errors.date && <span className="field-error">{errors.date}</span>}
-        </label>
+          <label>
+            Дата
+            <input
+              name="date"
+              type="date"
+              min={today}
+              value={form.date}
+              onChange={handleChange}
+              aria-invalid={Boolean(errors.date)}
+            />
+            {errors.date && <span className="field-error">{errors.date}</span>}
+          </label>
 
-        <label>
-          Время
-          <input
-            name="time"
-            type="time"
-            value={form.time}
-            onChange={handleChange}
-            aria-invalid={Boolean(errors.time)}
-          />
-          {errors.time && <span className="field-error">{errors.time}</span>}
-        </label>
+          <label>
+            Время
+            <input
+              name="time"
+              type="time"
+              value={form.time}
+              onChange={handleChange}
+              aria-invalid={Boolean(errors.time)}
+            />
+            {errors.time && <span className="field-error">{errors.time}</span>}
+          </label>
 
-        <label>
-          Гостей
-          <input
-            name="guests"
-            type="number"
-            min="1"
-            max="12"
-            value={form.guests}
-            onChange={handleChange}
-            aria-invalid={Boolean(errors.guests)}
-          />
-          {errors.guests && <span className="field-error">{errors.guests}</span>}
-        </label>
+          <label>
+            Гостей
+            <input
+              name="guests"
+              type="number"
+              min="1"
+              max="12"
+              value={form.guests}
+              onChange={handleChange}
+              aria-invalid={Boolean(errors.guests)}
+            />
+            {errors.guests && <span className="field-error">{errors.guests}</span>}
+          </label>
 
-        <label className="form-grid__wide">
-          Комментарий
-          <textarea
-            name="comment"
-            value={form.comment}
-            onChange={handleChange}
-            placeholder="Например: желательно столик у окна"
-            rows="4"
-          />
-        </label>
-      </div>
+          <label className="form-grid__wide">
+            Комментарий
+            <textarea
+              name="comment"
+              value={form.comment}
+              onChange={handleChange}
+              placeholder="Например: желательно столик у окна"
+              rows="4"
+            />
+          </label>
+        </div>
 
-      <button className="button button--primary" type="submit">
-        <CalendarCheck size={18} aria-hidden="true" />
-        Отправить заявку
-      </button>
+        <button className="button button--primary" type="submit">
+          <CalendarCheck size={18} aria-hidden="true" />
+          Отправить заявку
+        </button>
+      </form>
 
-      {isSubmitted && (
-        <p className="success-message" role="status">
-          Спасибо! Мы получили вашу заявку на бронирование.
-        </p>
+      {isSubmitted && bookingDetails && (
+        <div className="modal-overlay" role="presentation" onClick={closeModal}>
+          <div
+            className="booking-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="booking-success-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button className="modal-close" type="button" aria-label="Закрыть окно" onClick={closeModal}>
+              <X size={20} aria-hidden="true" />
+            </button>
+            <span className="modal-icon">
+              <CalendarCheck size={26} aria-hidden="true" />
+            </span>
+            <h3 id="booking-success-title">Спасибо! Мы получили вашу заявку на бронирование.</h3>
+            <p>
+              Столик на {bookingDetails.guests} гостя(ей), {bookingDetails.date} в {bookingDetails.time}.
+              Администратор свяжется с вами по номеру {bookingDetails.phone}.
+            </p>
+            <button className="button button--primary" type="button" onClick={closeModal}>
+              Отлично
+            </button>
+          </div>
+        </div>
       )}
-    </form>
+    </>
   );
 }
 

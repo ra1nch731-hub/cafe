@@ -68,24 +68,24 @@ export const menuItems = [
 
 export const popularItems = [
   {
-    name: 'Раф лаванда',
-    description: 'Мягкий напиток с цветочным послевкусием.',
+    name: 'Лавандовый раф',
+    description: 'Нежный раф с ароматом лаванды.',
     price: '340 ₽',
     badge: 'Хит',
-    image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=700&q=85',
+    image: '/images/lavender-raf.jpg',
   },
   {
     name: 'Сырники с ягодами',
     description: 'Завтрак, ради которого гости возвращаются каждый день.',
     price: '450 ₽',
     badge: 'Завтрак',
-    image: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=85',
+    image: '/images/syrniki.jpg',
   },
   {
     name: 'Круассан миндальный',
     description: 'Хрустящая выпечка сминдальной начинкой.',
     price: '310 ₽',
     badge: 'Выпечка',
-    image: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=700&q=85',
+    image: '/images/almond-croissant.jpg',
   },
 ];

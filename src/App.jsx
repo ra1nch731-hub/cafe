@@ -1,5 +1,17 @@
-import React from 'react';
-import { ArrowRight, Coffee, Croissant, MapPin, Phone, Quote, Star, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import {
+  ArrowRight,
+  ArrowUp,
+  Coffee,
+  Croissant,
+  MapPin,
+  Menu,
+  Phone,
+  Quote,
+  Star,
+  Users,
+  X,
+} from 'lucide-react';
 import { menuItems, popularItems } from './data/menu.js';
 import BookingForm from './components/BookingForm.jsx';
 import MenuSection from './components/MenuSection.jsx';
@@ -7,17 +19,17 @@ import MenuSection from './components/MenuSection.jsx';
 const advantages = [
   {
     title: 'Свежая обжарка',
-    text: 'Готовим кофе из свежих зёрен локальной обжарки.',
+    text: 'Готовим кофе из свежих зёрен своей обжарки.',
     icon: Coffee,
   },
   {
     title: 'Своя выпечка',
-    text: 'Круассаны, тарталетки и чизкейки готовим небольшими партиями каждое утро.',
+    text: 'Готовим круассаны, тарталетки и чизкейки каждое утро.',
     icon: Croissant,
   },
   {
-    title: 'Уют для встреч',
-    text: 'Быстрый Wi-Fi и светлый интерьер для завтраков, работы и свиданий.',
+    title: 'Уютные встречи',
+    text: 'Быстрый Wi-Fi и светлый интерьер для завтраков и работы.',
     icon: Users,
   },
 ];
@@ -60,17 +72,32 @@ const reviews = [
 ];
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Cup and Corner">
           Cup & Corner
         </a>
-        <nav className="nav" aria-label="Основная навигация">
-          <a href="#about">О нас</a>
-          <a href="#menu">Меню</a>
-          <a href="#booking">Бронь</a>
-          <a href="#contacts">Контакты</a>
+        <button
+          className="menu-toggle"
+          type="button"
+          aria-label={isMenuOpen ? 'Закрыть меню' : 'Открыть меню'}
+          aria-expanded={isMenuOpen}
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          {isMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+        </button>
+        <nav className={`nav ${isMenuOpen ? 'nav--open' : ''}`} aria-label="Основная навигация">
+          <a href="#about" onClick={closeMenu}>О нас</a>
+          <a href="#menu" onClick={closeMenu}>Меню</a>
+          <a href="#booking" onClick={closeMenu}>Бронь</a>
+          <a href="#contacts" onClick={closeMenu}>Контакты</a>
         </nav>
       </header>
 
@@ -80,8 +107,7 @@ function App() {
             <p className="eyebrow">Specialty coffee house</p>
             <h1>Cup & Corner</h1>
             <p className="hero__lead">
-              Кофейня на каждый день: авторский кофе, свежие завтраки и столики для
-              неспешных встреч в центре города.
+              Кофейня на каждый день: авторский кофе и свежие завтраки для уютных встреч.
             </p>
             <div className="hero__actions">
               <a className="button button--primary" href="#menu">
@@ -155,7 +181,7 @@ function App() {
         <section className="section gallery" id="gallery">
           <div className="section__intro">
             <p className="eyebrow">Интерьер</p>
-            <h2>Свет, дерево и аромат свежей выпечки</h2>
+            <h2>Тёплый свет, мягкие кресла и аромат кофе</h2>
           </div>
           <div className="gallery-grid">
             {gallery.map((image) => (
@@ -231,6 +257,10 @@ function App() {
         <strong>Cup & Corner</strong>
         <span>Кофе, завтраки и уютные встречи</span>
       </footer>
+
+      <a className="scroll-top" href="#top" aria-label="Наверх">
+        <ArrowUp size={22} aria-hidden="true" />
+      </a>
     </>
   );
 }
